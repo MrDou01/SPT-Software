@@ -1,0 +1,215 @@
+ Help Documentation for Sand Soil Seismic Liquefaction Index Calculation and Classification Software
+ Version: 1.0
+
+ 1. Overview
+ 1.1 Software Introduction
+This professional-grade software is designed for calculating the seismic liquefaction index and classifying liquefaction grades of sandy soils based on Standard Penetration Test (SPT) data. It strictly adheres to engineering specifications and technical documents for liquefaction evaluation, featuring a user-friendly interface with binary-choice parameter input logic to simplify operations while ensuring calculation accuracy.
+
+ 1.2 Core Features
+- Dual Input Modes: Supports manual parameter entry for single-site analysis and batch Excel table import for large-scale geotechnical investigations.
+- Binary-Choice Parameters: Optimized input for three key parameter categories (seismic parameters, particle content, β calculation method) to avoid redundant operations.
+- Intelligent Column Recognition: Automatically identifies multiple alias formats for table columns during import, reducing manual mapping work.
+- Comprehensive Calculation: Implements a 5-step liquefaction evaluation process, including critical value calculation, probability analysis, and grade classification.
+- Visual Data Presentation: Generates color-coded liquefaction probability distribution charts for intuitive depth-dependent risk assessment.
+- Multi-site Management: Efficiently manages and analyzes data from multiple measurement points with seamless switching and result storage.
+- Standardized Results: Provides liquefaction index (ILE), grade classification, liquefaction possibility assessment, and targeted anti-liquefaction measures.
+- Flexible Result Export: Exports detailed calculation results to Excel with multi-sheet organization (summary, layer-by-layer details, parameter explanations, measures).
+
+ 1.3 Applicable Scope
+The software is applicable to seismic liquefaction evaluation of saturated sandy soil layers in construction engineering, geotechnical engineering, and seismic engineering. It supports liquefaction discrimination depths of 15m and 20m, covering most common engineering scenarios.
+
+ 2. Installation and Startup
+ 2.1 System Requirements
+- Operating System: Windows 10/11 (64-bit), macOS 10.15+, or Linux (Ubuntu 20.04+)
+- Python Environment: Python 3.7 or higher
+
+ 2.2 Startup Interface
+Upon successful startup, the main interface will display a menu bar and three core tabs:
+- Manual Input: For single-site parameter entry and calculation.
+- Table Import: For batch processing of multi-site data via Excel.
+- Calculation Results: For viewing, analyzing, and exporting results.
+
+ 3. Interface and Operation Guide
+ 3.1 Menu Bar
+ 3.1.1 File Menu
+- Export Calculation Results: Exports all stored site results to an Excel file.
+- Exit: Closes the software (unsaved results will be lost).
+
+ 3.1.2 Help Menu
+- Software Introduction: Displays core functions, binary-choice logic, and calculation workflows.
+- Parameter Description: Details all input parameters, valid ranges, and default values.
+- Liquefaction Classification Standards: Shows grade classification criteria and anti-liquefaction measures.
+- About Software: Displays version information and optimization features.
+
+ 3.2 Manual Input Tab
+Designed for single-site parameter entry, organized into 5 functional sections:
+
+ 3.2.1 Site Management
+- Current Site: Dropdown menu to switch between multiple sites.
+- Add Site: Creates a new site with default parameters.
+- Delete Site: Removes the current site (at least one site must be retained).
+
+ 3.2.2 Binary-Choice Parameter Selection
+- Seismic Parameters: Two options are available. One is Surface Peak Acceleration (amax), allowing direct input of peak ground acceleration in g. The other is Seismic Intensity, with selectable grades of 7/8/9 degrees that map to standard amax values.
+- Particle Content: Offers two choices. Clay Content (ρc) is the percentage of clay particles, automatically capped at 3% if the input is less than 3%. Fine Particle Content (Fc) is the percentage of fine particles, automatically capped at 15% if the input is less than 15%.
+- β Calculation Method: Provides two calculation ways. Design Earthquake Group uses group-specific β values (Group 1: 0.80; Group 2: 0.95; Group 3: 1.05). Formula Calculation (Ms) computes β using the formula β = 0.20Ms - 0.50, where Ms is the surface wave magnitude.
+
+ 3.2.3 Basic Parameters
+- Seismic Intensity/amax: Dynamically enabled based on the selected seismic parameter type.
+- Discrimination Depth: Selectable between 15m and 20m, which determines the thresholds for liquefaction grade classification.
+- Groundwater Depth (dw): The burial depth of the groundwater table, measured in meters.
+- Surface Wave Magnitude (Ms): Required when choosing the formula-based β calculation method.
+- Design Earthquake Group: Required when selecting the group-based β calculation method.
+
+ 3.2.4 Soil Layer Parameters
+A table for entering SPT data of multiple soil layers, including three key columns:
+- Saturated Sand Depth (ds): The depth of the SPT measurement point in the soil layer, in meters.
+- Measured SPT Blow Count (N): The actual blow count obtained from the SPT test.
+- Particle Content Value: The content of clay or fine particles, with automatic limits applied to meet minimum value requirements.
+
+ 3.2.5 Operation Buttons
+- Add Soil Layer: Adds a new row to the soil layer table, with the default ds value set to the last layer’s ds plus 3m.
+- Delete Last Layer: Removes the most recently added soil layer (at least one layer must be retained).
+- Clear Input: Resets all parameters of the current site to their default values.
+- Calculate: Executes the liquefaction calculation and automatically switches to the Calculation Results tab.
+
+ 3.3 Table Import Tab
+For batch processing of multi-site data, organized into 6 functional sections:
+
+ 3.3.1 File Operations
+- Browse File: Opens a dialog to select an Excel file (`.xlsx`/`.xls`) for import.
+- Clear Import: Resets all imported data, parameter settings, and recognition results.
+- File Path: Displays the full path of the selected Excel file for reference.
+
+ 3.3.2 Column Recognition Results
+Automatically maps columns from the imported table to the software’s standard parameters, supporting multiple aliases for each parameter. Unrecognized columns are labeled "Not Recognized"—users should check the input table format if critical columns are not identified.
+
+ 3.3.3 Data Preview
+Displays up to 20 rows of the imported data to help users verify data integrity and correctness before calculation.
+
+ 3.3.4 Parameter Settings
+Replicates the binary-choice parameter selection from the Manual Input tab, with additional options:
+- Select Calculation Site: A dropdown menu to choose a specific site from the imported multi-site data.
+- Batch Calculate All Sites: Triggers simultaneous liquefaction calculation for all imported sites.
+- Calculate Selected Site: Executes calculation only for the site selected in the dropdown menu.
+
+ 3.3.5 Data Statistics
+Displays key statistical information about the imported data:
+- Total number of records, number of sites, and number of records per site.
+- Distribution statistics for SPT blow count (N), particle content, and seismic parameters.
+
+ 3.3.6 Import Tips
+- Required columns include Site Number, Saturated Sand Depth, Measured SPT Blow Count, either Clay or Fine Particle Content, and either amax or Seismic Intensity.
+- Rows with the same Site Number are automatically grouped as data for a single measurement point.
+- Particle content values are processed automatically: Clay Content (ρc) is set to 3% if input is less than 3%, and Fine Particle Content (Fc) is set to 15% if input is less than 15%.
+- Users must verify column recognition results before initiating calculations to ensure data accuracy.
+
+ 3.4 Calculation Results Tab
+Displays comprehensive results and visualizations, organized into 4 sections:
+
+ 3.4.1 Core Results
+- Site Selection: A dropdown menu to switch between different calculated sites.
+- Key Parameters: Shows selected input parameters and core calculation results, including seismic parameters, particle content type, and β value.
+- Liquefaction Index (ILE): A quantitative indicator reflecting the overall liquefaction potential of the site.
+- Liquefaction Grade: A qualitative classification (Slight/Moderate/Severe/No Liquefaction) based on ILE and discrimination depth.
+- Overall Liquefaction Possibility: A comprehensive assessment (High/Medium/Low) derived from the average liquefaction probability (PL) of all soil layers.
+- Building Seismic Fortification Class: A dropdown menu to select the building’s fortification class (B/C/D), enabling tailored anti-liquefaction measure recommendations.
+
+ 3.4.2 Standards and Anti-liquefaction Measures
+- Grade Standards: Displays the thresholds for liquefaction grade classification and the criteria for PL-based liquefaction possibility assessment.
+- Anti-liquefaction Measures: Generates specific recommendations based on the selected building fortification class and the calculated liquefaction grade.
+
+ 3.4.3 Calculation Details
+A text-based display of layer-by-layer calculation results, including:
+- Soil layer depth, measured SPT blow count (N), and particle content value.
+- Critical SPT value (Ncr) and liquefaction probability (PL) for each layer.
+- Critical SPT value at arbitrary probability (Ncr,PL).
+- Liquefaction possibility (color-coded: red for High, orange for Medium, green for Low).
+- Depth-dependent weight coefficient (wi) and the layer’s contribution to the total liquefaction index (ILE).
+
+ 3.4.4 Liquefaction Probability Distribution Chart
+- A scatter plot showing the relationship between liquefaction probability (PL) and soil depth (with depth increasing downward).
+- Color-coded data points and connecting lines (red for High possibility, orange for Medium, green for Low).
+- Critical PL threshold lines (0.3 and 0.5) with shaded regions to highlight risk ranges.
+- Annotations displaying the total liquefaction index (ILE) for quick reference.
+- Interactive grid lines and a legend to enhance readability and interpretation.
+
+ 4.  Parameter Explanation
+ 4.1 Seismic Parameters
+- Surface Peak Acceleration (amax): The peak ground acceleration at the ground surface, with a valid range of 0.10–0.40g. Direct input is required, and values outside this range will trigger an error prompt.
+- Seismic Intensity: A grade classification of seismic intensity (7/8/9 degrees) that maps to standard amax values (7°→0.1g, 8°→0.2g, 9°→0.4g). No manual amax input is needed when this option is selected.
+
+ 4.2 Soil Property Parameters
+- Clay Content (ρc): The percentage of clay particles in the soil, with a minimum valid value of 3%. If the input is less than 3%, it is automatically set to 3%.
+- Fine Particle Content (Fc): The percentage of fine particles (particle size <0.075mm) in the soil, with a minimum valid value of 15%. If the input is less than 15%, it is automatically set to 15%.
+- Saturated Sand Depth (ds): The depth of the SPT measurement point in the saturated sand layer, with a valid range of 0–20m. Layers beyond 20m are excluded from ILE calculation.
+- Measured SPT Blow Count (N): The actual blow count from the standard penetration test (corrected for energy), with a minimum valid value of 1. Non-numeric inputs will trigger an error.
+
+ 4.3 Environmental and Design Parameters
+- Groundwater Depth (dw): The burial depth of the groundwater table, typically ranging from 0–10m. It is a critical factor affecting liquefaction potential.
+- Surface Wave Magnitude (Ms): The magnitude of the earthquake’s surface wave, typically ranging from 5.0–8.0. It is only required when using the formula-based β calculation method.
+- Design Earthquake Group: A project-specific seismic design classification (1/2/3). It is only required when using the group-based β calculation method.
+- Discrimination Depth: The maximum depth for liquefaction evaluation (15m or 20m), which determines the thresholds for liquefaction grade classification.
+
+ 5. Results Interpretation
+ 5.1 Core Results
+- Liquefaction Index (ILE): A quantitative indicator where higher values indicate a greater potential for liquefaction at the site.
+- Liquefaction Grade: A qualitative classification (Slight/Moderate/Severe/No Liquefaction) determined by the ILE value and selected discrimination depth.
+- Overall Liquefaction Possibility: A comprehensive risk assessment (High/Medium/Low) derived from the average PL value of all soil layers, providing an overview of the site’s liquefaction risk.
+- Layer-by-Layer PL Values: Identify specific depth ranges with high liquefaction risk, displayed in color-coded format for quick recognition and targeted risk mitigation.
+
+ 5.2 Anti-liquefaction Measures
+Recommendations are tailored to the building’s seismic fortification class and the calculated liquefaction grade:
+- Building Class B:
+  - Slight Liquefaction: Partially eliminate liquefaction settlement, or treat the foundation and superstructure.
+  - Moderate Liquefaction: Completely eliminate liquefaction settlement, or partially eliminate it and treat the foundation and superstructure.
+  - Severe Liquefaction: Completely eliminate liquefaction settlement.
+- Building Class C:
+  - Slight Liquefaction: Treat the foundation and superstructure, or may not require treatment.
+  - Moderate Liquefaction: Treat the foundation and superstructure, or take stricter mitigation measures.
+  - Severe Liquefaction: Completely eliminate liquefaction settlement, or partially eliminate it and treat the foundation and superstructure.
+- Building Class D:
+  - Slight Liquefaction: No measures needed.
+  - Moderate Liquefaction: No measures needed.
+  - Severe Liquefaction: Treat the foundation and superstructure, or take other economical and reasonable measures.
+
+ 5.3 Exported Excel Structure
+The exported Excel file includes four dedicated sheets:
+1. Calculation Results Summary: An overview of all sites, including key input parameters, liquefaction index (ILE), grade classification, average PL value, and overall liquefaction possibility.
+2. Site-specific Detail Sheets: Layer-by-layer calculation results for each site, labeled by site number for easy reference.
+3. Parameter Explanation: Detailed definitions, valid ranges, and calculation logic for all input and output parameters.
+4. Anti-liquefaction Measures: Standardized mitigation recommendations for different building fortification classes and liquefaction grades.
+
+ 6. Troubleshooting
+ 6.1 Common Issues and Solutions
+- Excel Import Fails: This may occur due to unsupported file formats, merged cells in the table, or corrupted files. Solution: Use .xlsx/.xls formats, remove merged cells, and verify file integrity before import.
+- Critical Columns Not Recognized: This happens when column names in the imported table do not match supported aliases. Solution: Rename columns to standard names or use supported aliases (see Appendix A).
+- Calculation Error (Value Out of Range): Triggered by amax values outside the 0.10–0.40g range or non-numeric inputs. Solution: Correct amax to the valid range and ensure all inputs are numeric.
+- Chart Not Displaying: Caused by matplotlib font issues or library version incompatibility. Solution: Update matplotlib to the latest version and ensure the system supports required fonts (e.g., Arial, SimHei).
+- Export Function Fails: Occurs when the `openpyxl` library is missing or the target folder lacks write permissions. Solution: Install `openpyxl` via pip and select a folder with write permissions.
+- Interface Elements Overlapping: Resulting from low screen resolution or outdated Python/tkinter versions. Solution: Increase screen resolution and update Python to 3.7+ and tkinter to the latest version.
+
+ 6.2 Error Messages
+- "amax value exceeds valid range (0.1–0.4g)": Indicates the input amax is outside the engineering-valid range. Action: Adjust amax to a value between 0.10g and 0.40g.
+- "Necessary columns are not recognized": Means one or more critical columns (Site Number, ds, N, particle content, seismic parameter) are missing from the imported table. Action: Add the missing columns to the Excel file.
+- "At least one site/soil layer must be kept": Attempting to delete the only remaining site or soil layer. Action: Add a new site/soil layer before proceeding with deletion.
+- "File reading failed": The Excel file is corrupted, password-protected, or in an unsupported format. Action: Use an uncorrupted, unprotected .xlsx/.xls file for import.
+
+ 7. Appendix
+ Appendix A: Supported Column Name Aliases
+The software automatically recognizes the following aliases for standard parameters:
+- Site Number: Site ID, Measurement Point Number, ID, Point No, Point ID
+- Saturated Sand Depth ds(m): Saturation Depth(m), ds, Saturated Burial Depth, Sand Depth ds, Burial Depth ds
+- Measured SPT Blow Count N: N value, Measured Penetration Value, Standard Penetration N, N, Blow Count N
+- Clay/Fine Particle Content(%): Clay Content ρc(%), ρc, Clay Content, Clay Percentage, Fine Particle Content Fc(%), Fc, Fine Particle Percentage
+- Surface Peak Acceleration amax(g): amax, Peak Acceleration, Acceleration Peak
+- Seismic Intensity: Intensity, Earthquake Grade
+
+ Appendix B: Technical Standards Reference
+- GB50011-2010: Code for Seismic Design of Buildings
+- SPT-based Liquefaction Index Calculation Method (Technical Specification)
+- Standard Penetration Test (SPT) Technical Guidelines
+
+
+---
+Disclaimer: This software is intended for engineering reference only. For formal engineering projects, results must be verified against national standards and professional geotechnical evaluations. The developers are not liable for any losses arising from the use of this software.
